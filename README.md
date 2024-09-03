@@ -1,21 +1,21 @@
 # Control Plane - GitHub Actions Example Using the CLI
 
-This example demonstrates building and deploying an app to Control Plane using the CLI (cpln) as part of a GitHub Action. 
+This example demonstrates building and deploying an app to Control Plane using the CLI (cpln) as part of a GitHub Action.
 
-The example is a Node.js app that displays the environment variables and start-up arguments.
+The example application is a Node.js app that displays the environment variables and start-up arguments.
 
 This example is provided as a starting point and your own unique delivery and/or deployment requirements will dictate the steps needed in your situation.
 
-## Control Plane Authentication Set Up 
+## Control Plane Authentication Set Up
 
-The Control Plane CLI require a `Service Account` with the proper permissions to perform actions against the Control Plane API. 
+The Control Plane CLI require a `Service Account` with the proper permissions to perform actions against the Control Plane API.
 
-1. Follow the Control Plane documentation to create a Service Account and create a key. Take a note of the key. It will be used in the next section.
+1. Follow the Control Plane documentation to create a Service Account and create a key. Take note of the key (download and/or copy to clipboard). It will be used in the next section.
 2. Add the Service Account to the `superusers` group. Once the GitHub Action executes as expected, a policy can be created with a limited set of permissions and the Service Account can be removed from the `superusers` group.
-   
+
 ## Example Set Up
 
-When triggered, the GitHub action will execute the steps defined in the workflow file located at `.github/workflow/deploy-to-control-plane.yml`. The example will containerize and push the application to the org's private image repository and create/update a GVC and workload hosted at Control Plane. 
+When triggered, the GitHub action will execute the steps defined in the workflow file located at `.github/workflow/deploy-to-control-plane.yml`. The example will containerize and push the application to the org's private image repository and create/update a GVC and workload hosted at Control Plane.
 
 **Perform the following steps to set up the example:**
 
@@ -36,18 +36,19 @@ Add the following variables:
 - `CPLN_IMAGE_NAME`: The name of the image that will be deployed. The workflow will append the short SHA of the commit as the image tag when pushing the image to the org's private image repository.
 
 3. Review the `.github/workflow/deploy-to-control-plane.yml` file:
-    - The workflow can be updated to be triggered on specific branches and actions (pushes, pull requests, etc.). The example is set to trigger on a push or pull request to the `main` branch on lines 9-12 (currently commented out).
-    - The `sed` command is used to substitute the `ORG_NAME`, `GVC_NAME`, `WORKLOAD_NAME` and `IMAGE_NAME_TAG` tokens inside the YAML files in the `/cpln` directory on lines 55-58.
 
-4.  The Control Plane YAML files are located in the `/cpln` directory. No changes are required to execute the example.
-    - The `cpln-gvc.yaml` file defines the GVC to be created/updated.
-    - The `cpln-workload.yaml` file defines the workload to be created/updated. 
+   - The workflow can be updated to be triggered on specific branches and actions (pushes, pull requests, etc.). The example is set to trigger on a push or pull request to the `main` branch on lines 9-12 (currently commented out).
+   - The `sed` command is used to substitute the `ORG_NAME`, `GVC_NAME`, `WORKLOAD_NAME` and `IMAGE_NAME_TAG` tokens inside the YAML files in the `/.cpln` directory on lines 56-59.
+
+4. The Control Plane YAML files are located in the `/.cpln` directory. No changes are required to execute the example.
+   - The `cpln-gvc.yaml` file defines the GVC to be created/updated.
+   - The `cpln-workload.yaml` file defines the workload to be created/updated.
 
 **To manually trigger the GitHub action:**
 
 1. From within the repository, click `Actions` (top menu).
 2. Click the `Deploy-To-Control-Plane` link under `Workflows`.
-3. Click the `Run workflow` pulldown button. 
+3. Click the `Run workflow` pulldown button.
 4. Select the branch to use.
 5. Click `Run workflow`.
 
