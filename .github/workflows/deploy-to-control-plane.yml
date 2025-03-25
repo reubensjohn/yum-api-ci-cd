@@ -6,8 +6,8 @@ name: Deploy-To-Control-Plane
 on:
   # Uncomment the lines you want actions that will cause the workflow to Triggers the workflow on push or pull request events but only for the main branch
 
-  # push:
-  #   branches: [main]
+  push:
+    branches: [main]
   # pull_request:
   #   branches: [main]
 
